@@ -7,6 +7,18 @@
 
 <body>
     <div id="page_div">
+        <div id="width_sel_div">
+            <p>Please Select Data Width<p>
+                <input id="16bit" type="radio" name="radio_width"  onclick="change_width()">
+                <label>16bit</label>
+                <input id="32bit" type="radio" name="radio_width" onclick="change_width()">
+                <label>32bit</label>
+                <input id="64bit" type="radio" checked="checked" name="radio_width" onclick="change_width()">
+                <label>64bit</label>
+                <input id="128bit" type="radio" name="radio_width" onclick="change_width()">
+                <label>128bit</label>
+        </div>
+
         <div id="ana_div">
             <p> Input Heximal Value to Analyzer (e.g. ABCD1234)</p>
             <input id="input_text" type="text" value="0" oninput="handle_input()">
@@ -31,11 +43,11 @@
 </body>
 <script>
     var radix = 16;
-    var TOTAL_BITS = 32;
-    var EACH_TABLE_BITS = 32;
-    var TABLE_NUM = (TOTAL_BITS / EACH_TABLE_BITS);
+    var TOTAL_BITS;
+    var EACH_TABLE_BITS;
+    var TABLE_NUM;
     var COLOR_BLOCK = 8;
-    var HEX_CHAR_NUM = parseInt((TOTAL_BITS / 4));
+    var HEX_CHAR_NUM;
     var select_started = 0;
     var ana_tb_bits = Array(TOTAL_BITS);
     var set_tb_bits = Array(TOTAL_BITS);
@@ -44,6 +56,44 @@
     var th_even_color = "RGB(200, 200, 255)";
     var th_old_color = "RGB(230, 255, 230)";
 
+    function build_params(total_bits, each_table_bits) {
+        select_started = 0;
+        TOTAL_BITS = total_bits;
+        EACH_TABLE_BITS = each_table_bits;
+        TABLE_NUM = (TOTAL_BITS / EACH_TABLE_BITS);
+        ana_tb_bits = Array(total_bits);
+        set_tb_bits = Array(total_bits);
+        HEX_CHAR_NUM = parseInt((TOTAL_BITS / 4));
+    }
+
+    function remove_table_items(prefix) {
+        var table_div = document.getElementById(prefix + "tables");
+        table_div.querySelectorAll('*').forEach(n => n.remove());
+    }
+
+    function change_width () {
+        switch (event.target.id) {
+            case "16bit":
+                build_params(16, 16);
+                break;
+            case "32bit":
+                build_params(32, 32);
+                break;
+            case "64bit":
+                build_params(64, 32);
+                break;
+            case "128bit":
+                build_params(128, 32);
+                break;
+            default:
+                break;
+        }
+
+        remove_table_items("ana_");
+        remove_table_items("set_");
+        create_table("ana_", ana_tb_bits, "");
+        create_table("set_", set_tb_bits, "handle_tb_click()");
+    }
     function update_select_text(value) {
         var hex_str = "0x" + parseInt(value, 2).toString(radix).toUpperCase();
         var bin_str = value + "B"
@@ -310,6 +360,7 @@
         console.log("input change");
     }
     window.onload = function() {
+        build_params(64, 32);
         create_table("ana_", ana_tb_bits, "");
         create_table("set_", set_tb_bits, "handle_tb_click()");
     }

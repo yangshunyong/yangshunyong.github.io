@@ -51,6 +51,10 @@ p {
     left: 20%;
 }
 
+#width_sel_div {
+    margin-left: 2%; 
+}
+
 #input_text {
     width: 20%;
 }
