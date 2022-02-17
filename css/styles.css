@@ -63,9 +63,15 @@ p {
 #set_div {
     margin-left: 2%;
     margin-right: 2%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 #set_tables {
     margin-top: 2%;
+}
+
+#author_logo {
+    margin-left: 2%;
+    font-size: small;
+    color:grey;
 }
