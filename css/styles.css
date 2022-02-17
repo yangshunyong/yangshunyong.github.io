@@ -63,6 +63,18 @@ p {
     width: 5%;
 }
 
+#intro_div {
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 5%;
+}
+#intro_div, p {
+    font-style: normal;
+    font-size: small;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 10px;
+}
+
 #ana_div,
 #set_div {
     margin-left: 2%;
