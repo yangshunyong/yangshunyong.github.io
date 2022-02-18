@@ -91,7 +91,7 @@ p {
 
 /* Extern page to bootom of the page */
 #logo_div {
-    min-height: calc(40vh - 50px);
+    min-height: calc(100vh - 50px);
 }
 
 #author_logo {
