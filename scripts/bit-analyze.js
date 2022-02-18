@@ -1,25 +1,26 @@
-var radix = 16;
-var TOTAL_BITS;
-var EACH_TABLE_BITS;
-var TABLE_NUM;
-var COLOR_BLOCK = 8;
-var HEX_CHAR_NUM;
+var CFG_RADIX = 16;
+var CFG_COLOR_BLOCK = 8;
+var CFG_TB_0_COLOR = "RGB(255, 255, 255)"
+var CFG_TB_1_COLOR = "RGB(253, 153, 153)"
+var CFG_TH_EVEN_COLOR = "RGB(200, 200, 255)";
+var CFG_TH_ODD_COLOR = "RGB(230, 255, 230)";
+
+var g_total_bits;
+var g_each_table_bits;
+var g_table_num;
+var g_hex_char_num;
 var select_started = 0;
-var ana_tb_bits = Array(TOTAL_BITS);
-var set_tb_bits = Array(TOTAL_BITS);
-var tb_0_color = "RGB(255, 255, 255)"
-var tb_1_color = "RGB(253, 153, 153)"
-var th_even_color = "RGB(200, 200, 255)";
-var th_old_color = "RGB(230, 255, 230)";
+var g_ana_tb_bits = Array(g_total_bits);
+var g_set_tb_bits = Array(g_total_bits);
 
 function build_params(total_bits, each_table_bits) {
-    select_started = 0;
-    TOTAL_BITS = total_bits;
-    EACH_TABLE_BITS = each_table_bits;
-    TABLE_NUM = (TOTAL_BITS / EACH_TABLE_BITS);
-    ana_tb_bits = Array(total_bits);
-    set_tb_bits = Array(total_bits);
-    HEX_CHAR_NUM = parseInt((TOTAL_BITS / 4));
+    g_select_started = 0;
+    g_total_bits = total_bits;
+    g_each_table_bits = each_table_bits;
+    g_table_num = (g_total_bits / g_each_table_bits);
+    g_ana_tb_bits = Array(total_bits);
+    g_set_tb_bits = Array(total_bits);
+    g_hex_char_num = parseInt((g_total_bits / 4));
 }
 
 function remove_table_items(prefix) {
@@ -47,12 +48,12 @@ function change_width () {
 
     remove_table_items("ana_");
     remove_table_items("set_");
-    create_table("ana_", ana_tb_bits, "");
-    create_table("set_", set_tb_bits, "handle_tb_click()");
+    create_table("ana_", g_ana_tb_bits, "");
+    create_table("set_", g_set_tb_bits, "handle_tb_click()");
     document.getElementById("input_text").value = "0";
 }
 function update_select_text(value) {
-    var hex_str = "0x" + parseInt(value, 2).toString(radix).toUpperCase();
+    var hex_str = "0x" + parseInt(value, 2).toString(CFG_RADIX).toUpperCase();
     var bin_str = value + "B"
     document.getElementById("selected_value").innerHTML = "Selected Value: " + hex_str + ", " + bin_str;
 }
@@ -65,7 +66,7 @@ function create_table(prefix, tb_bits, callback) {
     var tr_header;
     var color_block;
 
-    for (i = TABLE_NUM - 1; i >= 0; i--) {
+    for (i = g_table_num - 1; i >= 0; i--) {
         /* Create new table */
         new_table = document.createElement("table");
         new_table.setAttribute("id", prefix + "table" + i);
@@ -77,16 +78,16 @@ function create_table(prefix, tb_bits, callback) {
         new_data_row = document.createElement("tr");
         new_data_row.setAttribute("id", prefix + "data_row" + i);
 
-        for (j = EACH_TABLE_BITS - 1; j >= 0; j--) {
-            var curr_bit = i * EACH_TABLE_BITS + j;
-            color_block = parseInt(j / COLOR_BLOCK) % 2;
+        for (j = g_each_table_bits - 1; j >= 0; j--) {
+            var curr_bit = i * g_each_table_bits + j;
+            color_block = parseInt(j / CFG_COLOR_BLOCK) % 2;
 
             /* Create MSB table header */
             tr_header = document.createElement("th");
             tr_header.setAttribute("id", "tr_header" + j);
-            tr_header.style.backgroundColor = (color_block == 1) ? th_old_color : th_even_color;
+            tr_header.style.backgroundColor = (color_block == 1) ? CFG_TH_ODD_COLOR : CFG_TH_EVEN_COLOR;
 
-            /*tr_header.innerHTML = (j == (EACH_TABLE_BITS - 1)) ?
+            /*tr_header.innerHTML = (j == (g_each_table_bits - 1)) ?
                 "B" + "" + curr_bit : curr_bit;*/
             tr_header.innerHTML = curr_bit;
             if ((curr_bit % 4) == 0) {
@@ -129,7 +130,7 @@ function update_table(bits, tb_bits) {
     var valid_bits = bits.length;
     var bit_val;
 
-    for (i = TOTAL_BITS - 1; i >= 0; i--) {
+    for (i = g_total_bits - 1; i >= 0; i--) {
         if (i >= valid_bits) {
             bit_val = "0";
         } else {
@@ -137,9 +138,9 @@ function update_table(bits, tb_bits) {
         }
         tb_bits[i].innerHTML = bit_val;
         if (bit_val == "1")
-            tb_bits[i].style.backgroundColor = tb_1_color;
+            tb_bits[i].style.backgroundColor = CFG_TB_1_COLOR;
         else
-            tb_bits[i].style.backgroundColor = tb_0_color;
+            tb_bits[i].style.backgroundColor = CFG_TB_0_COLOR;
     }
 }
 
@@ -183,7 +184,7 @@ function bits_string_to_hex(str) {
 }
 
 function hex1_to_bits(str) {
-    var int_input = parseInt(str, radix);
+    var int_input = parseInt(str, CFG_RADIX);
 
     if (isNaN(int_input)) {
         return "";
@@ -222,8 +223,8 @@ function hex_string_to_bits(str, max_length) {
 
 function copy_to_set() {
     var str_input = document.getElementById("input_text").value;
-    bits = hex_string_to_bits(str_input, HEX_CHAR_NUM);
-    update_table(bits, set_tb_bits);
+    bits = hex_string_to_bits(str_input, g_hex_char_num);
+    update_table(bits, g_set_tb_bits);
 
     console.log(str_input);
     console.log(bits);
@@ -232,18 +233,18 @@ function copy_to_set() {
 
 function handle_input() {
     var str_input = document.getElementById("input_text").value;
-    var bits = hex_string_to_bits(str_input, HEX_CHAR_NUM);
+    var bits = hex_string_to_bits(str_input, g_hex_char_num);
 
-    bits = bits.padStart(TOTAL_BITS, '0');
+    bits = bits.padStart(g_total_bits, '0');
 
-    update_table(bits, ana_tb_bits);
-    if (select_started == 1) {
+    update_table(bits, g_ana_tb_bits);
+    if (g_select_started == 1) {
         handle_select();
     }
 }
 
 function refresh_table(table_bits) {
-    var bits = tb_to_bits(table_bits, 0, TOTAL_BITS);
+    var bits = tb_to_bits(table_bits, 0, g_total_bits);
     update_table(bits, table_bits);
 }
 
@@ -256,7 +257,7 @@ function handle_select() {
     first_str = first_str.trim();
     second_str = second_str.trim();
 
-    refresh_table(ana_tb_bits);
+    refresh_table(g_ana_tb_bits);
     if (pos_comma < 0) {
         return;
     }
@@ -278,14 +279,14 @@ function handle_select() {
         second_pos = temp;
     }
 
-    bits = tb_to_bits(ana_tb_bits, first_pos, second_pos + 1);
+    bits = tb_to_bits(g_ana_tb_bits, first_pos, second_pos + 1);
     for (i = first_pos; i <= second_pos; i++) {
-        ana_tb_bits[i].style.backgroundColor = "RGB(255, 0, 0)";
+        g_ana_tb_bits[i].style.backgroundColor = "RGB(255, 0, 0)";
     }
 
     update_select_text(bits);
 
-    select_started = 1;
+    g_select_started = 1;
 }
 
 function update_set_text(bits) {
@@ -295,7 +296,7 @@ function update_set_text(bits) {
 
 function reset_set() {
     var bits = "0";
-    update_table(bits, set_tb_bits);
+    update_table(bits, g_set_tb_bits);
     update_set_text(bits);
 }
 
@@ -305,9 +306,9 @@ function handle_tb_click() {
     var hex_str, bits;
 
     tb.innerHTML = (bit_val == "1") ? "0" : "1";
-    refresh_table(set_tb_bits);
+    refresh_table(g_set_tb_bits);
 
-    bits = tb_to_bits(set_tb_bits, 0, TOTAL_BITS);
+    bits = tb_to_bits(g_set_tb_bits, 0, g_total_bits);
     update_set_text(bits);
 
     console.log(event.target.id + " clicked");
@@ -318,6 +319,6 @@ function handle_set_input() {
 }
 window.onload = function() {
     build_params(64, 32);
-    create_table("ana_", ana_tb_bits, "");
-    create_table("set_", set_tb_bits, "handle_tb_click()");
+    create_table("ana_", g_ana_tb_bits, "");
+    create_table("set_", g_set_tb_bits, "handle_tb_click()");
 }

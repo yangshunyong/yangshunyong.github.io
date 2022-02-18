@@ -1,9 +1,9 @@
 * {
-    /* font-size: 1.1rem; */
 }
 h2 {
     /* make page reach to of top of the display window */
     margin: 0;
+    font-style: normal;
 }
 body {
     background-color: white;
@@ -21,11 +21,9 @@ table {
 }
 
 input {
-    border-radius: 5px;
 }
 
 button {
-    border-radius: 5px;
 }
 
 th {
@@ -54,8 +52,16 @@ p {
     left: 15%;
 }
 
+#intro_div {
+}
+
 #width_sel_div {
-    margin-left: 2%; 
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+    border-style: groove;
+    border-radius: 10px;
+    border-width: 1px;
 }
 
 #input_text {
@@ -83,6 +89,9 @@ p {
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 5%;
+    border-style: groove;
+    border-radius: 10px;
+    border-width: 1px;
 }
 
 #set_tables {
