@@ -49,6 +49,7 @@ function change_width () {
     remove_table_items("set_");
     create_table("ana_", ana_tb_bits, "");
     create_table("set_", set_tb_bits, "handle_tb_click()");
+    document.getElementById("input_text").value = "0";
 }
 function update_select_text(value) {
     var hex_str = "0x" + parseInt(value, 2).toString(radix).toUpperCase();
