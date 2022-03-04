@@ -21,9 +21,13 @@ table {
 }
 
 input {
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 button {
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 th {
@@ -54,7 +58,8 @@ p {
     left: 15%;
 }
 
-#intro_div {
+#set_text {
+    background-color:#C0C0C0;
 }
 
 #width_sel_div {
