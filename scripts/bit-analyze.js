@@ -300,6 +300,22 @@ function reset_set() {
     update_set_text(bits);
 }
 
+function revert_set() {
+    var bits = tb_to_bits(g_set_tb_bits, 0, g_total_bits);
+    var revert_bits ="";
+
+    for (i = 0; i < g_total_bits; i++) {
+        if (bits[i] == "1") {
+            revert_bits += "0";
+        } else {
+            revert_bits += "1";
+        }
+    }
+
+    update_table(revert_bits, g_set_tb_bits);
+    update_set_text(revert_bits);
+}
+
 function handle_tb_click() {
     var tb = document.getElementById(event.target.id);
     var bit_val = tb.innerHTML;
