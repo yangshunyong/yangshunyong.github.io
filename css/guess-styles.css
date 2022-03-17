@@ -55,7 +55,7 @@ p {
 a:link, a:visited {
     background-color:cornflowerblue;
     color: white;
-    padding: 8px 24px;
+    padding: 4px 24px 4px 24px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -71,6 +71,10 @@ background-color:darkcyan;
     width: 70%;
     top: 0px;
     left: 15%;
+}
+
+#site_nav {
+    background-color: darkblue;
 }
 
 #content_div {
