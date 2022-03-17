@@ -1,5 +1,3 @@
-* {
-}
 h2 {
     /* make page reach to of top of the display window */
     margin: 0;
@@ -26,6 +24,9 @@ input {
 }
 
 button {
+    margin-left: 0;
+    margin-right: 70px;
+    width: 100px;
     border: 1px solid black;
     border-radius: 5px;
 }
@@ -41,6 +42,7 @@ th {
 td {
     margin: 0px;
     width: 40px;
+    height: 40px;
     border: 1px solid black;
     text-align: center;
 }
@@ -71,31 +73,22 @@ background-color:darkcyan;
     left: 15%;
 }
 
-#set_text {
-    background-color:#C0C0C0;
+#content_div {
+    margin-left: 30%;
 }
 
-#width_sel_div {
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
-    border-style: groove;
-    border-radius: 10px;
-    border-width: 1px;
+#button_div {
+    margin-left: 0%;
 }
 
-#input_text {
-    width: 20%;
-}
-
-#select_text {
-    width: 5%;
+#choice_text {
+    margin-left: 0%;
+    font-size: xx-large;
 }
 
 #intro_div {
-    margin-left: 2%;
     margin-right: 2%;
-    margin-bottom: 4%;
+    margin-bottom: 1%;
 }
 #intro_div, p {
     font-style:italic;
@@ -112,10 +105,6 @@ background-color:darkcyan;
     border-style: groove;
     border-radius: 10px;
     border-width: 1px;
-}
-
-#set_tables {
-    margin-top: 2%;
 }
 
 /* Extern page to bootom of the page */

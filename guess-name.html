@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/guess-styles.css">
+    <script src="scripts/guess-name.js"></script>
+</head>
+
+<body>
+    <div id="page_div">
+        <div id="content_div">
+            <div id="intro_div">
+                <div id="site_nav">
+                    <a href="index.html">Bit Analyzer</a>
+                    <a href="guess-name.html">Game: 猜姓氏</a>
+                </div>
+                <p id="p_tool">这是一个猜姓氏的小游戏. </p>
+                <p>::姓氏在表格中按拼音排序，出现的位置是固定的，您可以通过表格的序号来记位置</p>
+                <p>::如果表格里面有您的姓氏，选择“有”， 否则选择“没有”. </p>
+            </div>
+
+            <div id="first_name_div">
+                <div id="ana_tables">
+                </div>
+            </div>
+            <p id="choice_text">您的姓氏：？</p>
+            <div id="button_div">
+                <button id="have_name_btn" onclick="click_have_name()"> 有 </button>
+                <button id="no_name_btn" onclick="click_no_name()"> 没有 </button>
+                <button id="reset_game_btn" onclick="reset_game()"> 重玩 </button>
+            </div>
+            <div id="logo_div">
+                <p id="author_logo">Author: Yang Shunyong (dfysy@sina.com). Hope You Enjoy This Tiny Tool!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
