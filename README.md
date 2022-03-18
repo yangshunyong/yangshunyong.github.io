@@ -1,5 +1,5 @@
 # yangshunyong.github.io
-My github.io home page. You can access via https://yangshunyong.github.io/. <br>
+Code for my github.io home page. Please access via https://yangshunyong.github.io/. <br>
 Currently, this site have following contents,
 ## 1. Bit Analyzer Tool
    This is a tool to display each bit value of a hexadecimal data. You can display/select/reverse each bit.
