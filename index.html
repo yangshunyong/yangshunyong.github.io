@@ -31,9 +31,15 @@
         </div>
 
         <div id="ana_div">
-            <p> Input Heximal Value to Analyzer (e.g. ABCD1234)</p>
-            <input id="input_text" type="text" value="0" oninput="handle_input()">
+            <p> Input Heximal/Decimal Value to Analyzer (e.g. ABCD1234)</p>
+            <div id="input_div">
+                <p> Hex: </p>
+                <input id="input_text" type="text" value="0" oninput="handle_input()">
+                <p> Dec: </p>
+                <input id="input_text_dec" type="text" value="0" oninput="handle_input_dec()">
+            </div>
             <p> Select Some Bits: e.g. select bit 5 to 10 by typing 5, 10 </p>
+            <label for="select_text"> Bits:</label>
             <input id="select_text" type="text" oninput="handle_select()" value="0, 0">
             <p id="selected_value"> Selected Value: 0x0</p>
             <div id="ana_tables">

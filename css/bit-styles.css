@@ -45,11 +45,6 @@ td {
     text-align: center;
 }
 
-p {
-    font-style: italic;
-    font-family: 'Courier New', Courier, monospace;
-}
-
 a:link, a:visited {
     background-color:cornflowerblue;
     color: white;
@@ -92,6 +87,10 @@ background-color:darkcyan;
     width: 20%;
 }
 
+#input_text_dec {
+    width: 20%;
+}
+
 #select_text {
     width: 5%;
 }
@@ -101,7 +100,8 @@ background-color:darkcyan;
     margin-right: 2%;
     margin-bottom: 4%;
 }
-#intro_div, p {
+
+#intro_div, p, label {
     font-style:italic;
     font-size: small;
     font-family: 'Courier New', Courier, monospace;
@@ -116,6 +116,10 @@ background-color:darkcyan;
     border-style: groove;
     border-radius: 10px;
     border-width: 1px;
+}
+
+#input_div p {
+    display: inline;
 }
 
 #set_tables {

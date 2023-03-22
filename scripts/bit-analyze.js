@@ -256,8 +256,18 @@ function copy_to_set() {
 }
 
 function handle_input() {
+    var bigIntValue;
+    const outputBox = document.getElementById("input_text_dec");
     var str_input = document.getElementById("input_text").value;
     var bits = hex_string_to_bits(str_input, g_hex_char_num);
+
+    if (str_input.startsWith("0x") || str_input.startsWith("0x")) {
+        bigIntValue = BigInt(str_input);
+    } else {
+        bigIntValue = BigInt("0x" + str_input);
+    }
+    
+    outputBox.value = bigIntValue.toString();
 
     bits = bits.padStart(g_total_bits, '0');
 
@@ -265,6 +275,21 @@ function handle_input() {
     if (g_select_started == 1) {
         handle_select();
     }
+}
+
+function handle_input_dec() {
+    const inputBox = document.getElementById("input_text_dec");
+    const outputBox = document.getElementById("input_text");
+    // Get the value from the input box as a BigInt
+    const inputValue = BigInt(inputBox.value);
+
+    // Convert the BigInt value to a hex string
+    var hexValue = inputValue.toString(16);
+    hexValue = hexValue.toUpperCase();
+
+    // Set the value of the output text box to the hex string
+    outputBox.value = hexValue;
+    handle_input();
 }
 
 function refresh_table(table_bits) {
