@@ -122,16 +122,21 @@ function update_choice() {
 
     if ((g_current_group < g_max_group) || (name.length == 0)) {
         dots_str += ".";
-        p_choice.innerHTML = "您的姓氏：" + dots_str + "?"
+        p_choice.innerHTML = "您的姓氏：" + dots_str + "?";
         p_choice.style.color = "black"
-    } else {
+    } else if (g_current_group == g_max_group){
         dots_str =""
-        p_choice.innerHTML = "您的姓氏：" + name + "!!!!"
+        p_choice.innerHTML = "您的姓氏：" + name + "!!!!";
         p_choice.style.color = "red"
+    } else {
+        p_choice.innerHTML = "您赢了，猜不出来";
     }
 }
 
 function click_have_name() {
+    var p_choice = document.getElementById("choice_text");
+
+    g_select_started = 1;
     if (g_current_group >= 0) {
         g_user_choice |= 1 << (g_current_group);
     }
@@ -139,24 +144,38 @@ function click_have_name() {
     if (g_current_group < g_max_group) {
         g_current_group++;
         update_table(g_ana_tb_names, g_current_group);
+    } else {
+        p_choice.innerHTML = "对不起，我们暂时没有收录您的姓氏";
+        return;
     }
     update_choice();
     console.log("have name");
 }
 
 function click_no_name() {
+    var p_choice = document.getElementById("choice_text");
+
+    if (g_select_started == 0) {
+        p_choice.innerHTML = "您赢了，猜不出来";
+        return;
+    }
+    
     if (g_current_group < 0) {
         return;
     }
     if (g_current_group < g_max_group) {
         g_current_group++;
         update_table(g_ana_tb_names, g_current_group);
+    } else {
+        p_choice.innerHTML = "对不起，我们暂时没有收录您的姓氏";
+        return;
     }
     update_choice();
     console.log("no name");
 }
 
 function reset_game() {
+    g_select_started = 0;
     location.reload();
 }
 
