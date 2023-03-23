@@ -255,11 +255,28 @@ function copy_to_set() {
     document.getElementById("set_text").setAttribute("value", str_input);
 }
 
+function update_input() {
+    var bigIntValue;
+    var str_input = document.getElementById("input_text").value;
+    var bits = hex_string_to_bits(str_input, g_hex_char_num);
+
+    bits = bits.padStart(g_total_bits, '0');
+
+    update_table(bits, g_ana_tb_bits);
+    if (g_select_started == 1) {
+        handle_select();
+    }
+}
+
 function handle_input() {
     var bigIntValue;
     const outputBox = document.getElementById("input_text_dec");
     var str_input = document.getElementById("input_text").value;
     var bits = hex_string_to_bits(str_input, g_hex_char_num);
+
+    if ((str_input.length == 0) || (str_input.trim().length == 0)){
+        str_input = "0";
+    }
 
     if (str_input.startsWith("0x") || str_input.startsWith("0x")) {
         bigIntValue = BigInt(str_input);
@@ -268,13 +285,7 @@ function handle_input() {
     }
     
     outputBox.value = bigIntValue.toString();
-
-    bits = bits.padStart(g_total_bits, '0');
-
-    update_table(bits, g_ana_tb_bits);
-    if (g_select_started == 1) {
-        handle_select();
-    }
+    update_input();
 }
 
 function handle_input_dec() {
@@ -289,7 +300,7 @@ function handle_input_dec() {
 
     // Set the value of the output text box to the hex string
     outputBox.value = hexValue;
-    handle_input();
+    update_input();
 }
 
 function refresh_table(table_bits) {
