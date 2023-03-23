@@ -159,7 +159,7 @@ function click_no_name() {
         p_choice.innerHTML = "您赢了，猜不出来";
         return;
     }
-    
+
     if (g_current_group < 0) {
         return;
     }

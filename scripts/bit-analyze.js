@@ -256,7 +256,7 @@ function copy_to_set() {
 }
 
 function update_input() {
-    var bigIntValue;
+    var bigInt_value;
     var str_input = document.getElementById("input_text").value;
     var bits = hex_string_to_bits(str_input, g_hex_char_num);
 
@@ -269,8 +269,8 @@ function update_input() {
 }
 
 function handle_input() {
-    var bigIntValue;
-    const outputBox = document.getElementById("input_text_dec");
+    var bigInt_value;
+    const output_box = document.getElementById("input_text_dec");
     var str_input = document.getElementById("input_text").value;
     var bits = hex_string_to_bits(str_input, g_hex_char_num);
 
@@ -279,27 +279,27 @@ function handle_input() {
     }
 
     if (str_input.startsWith("0x") || str_input.startsWith("0x")) {
-        bigIntValue = BigInt(str_input);
+        bigInt_value = BigInt(str_input);
     } else {
-        bigIntValue = BigInt("0x" + str_input);
+        bigInt_value = BigInt("0x" + str_input);
     }
-    
-    outputBox.value = bigIntValue.toString();
+
+    output_box.value = bigInt_value.toString();
     update_input();
 }
 
 function handle_input_dec() {
-    const inputBox = document.getElementById("input_text_dec");
-    const outputBox = document.getElementById("input_text");
+    const input_box = document.getElementById("input_text_dec");
+    const output_box = document.getElementById("input_text");
     // Get the value from the input box as a BigInt
-    const inputValue = BigInt(inputBox.value);
+    const input_value = BigInt(input_box.value);
 
     // Convert the BigInt value to a hex string
-    var hexValue = inputValue.toString(16);
-    hexValue = hexValue.toUpperCase();
+    var hex_value = input_value.toString(16);
+    hex_value = hex_value.toUpperCase();
 
     // Set the value of the output text box to the hex string
-    outputBox.value = hexValue;
+    output_box.value = hex_value;
     update_input();
 }
 
