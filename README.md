@@ -11,3 +11,6 @@ Currently, this site have following contents,
 ## 2. Game: Guess Chinese Name.
 
    This is a game to demonstrate binary encoding for kids.
+
+## 3. Tool: Chinese Amateur License Certification Examination Tool
+   This is a GUI tool for study/simulate quizs/questions for Chinese Amateur License Certification.
